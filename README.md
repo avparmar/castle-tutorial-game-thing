@@ -1,2 +1,2 @@
-# totally-not-aliens
-whaaaaat?? nahhh man this ain't aliens
+# just a castle tutorial game
+getting my feet wet
