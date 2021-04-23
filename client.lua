@@ -36,7 +36,11 @@ end
 function client.draw()
   if client.connected then
     for clientId, location in pairs(share.players) do
-      love.graphics.rectangle('fill', location.x - 20, location.y - 20, 40, 40)
+      local x, y = location.x, location.y
+      if clientId == client.id then
+        x, y = home.x, home.y
+      end
+      love.graphics.rectangle('fill', x - 20, y - 20, 40, 40)
     end
   else
     love.graphics.print('connecting...', 20, 20)
