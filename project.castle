@@ -1,0 +1,7 @@
+main: client.lua
+multiplayer:
+  enabled: true
+  serverMain: server.lua
+title: I followed a medium article
+owner: zopzoob
+description: I followed a medium article

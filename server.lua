@@ -2,8 +2,12 @@ require 'common'
 
 local server = clientServer.server
 
-server.enabled = true
-server.start('22122')
+if USE_LOCAL_SERVER then
+  server.enabled = true
+  server.start('22122')
+else
+  server.useCastleConfig()
+end
 
 local share = server.share
 local homes = server.homes
@@ -23,6 +27,8 @@ end
 
 function server.disconnect(clientId)
   print('server: client ' .. clientId .. ' disconnected')
+
+  share.players[clientId] = nil
 end
 
 function server.receive(clientId, message, ...)
@@ -33,10 +39,16 @@ function server.receive(clientId, message, ...)
 end
 
 function server.update(dt)
-  for clientId, location in pairs(share.players) do
+  for clientId, player in pairs(share.players) do
     local home = homes[clientId]
+
     if home.x and home.y then
-      location.x, location.y = home.x, home.y
+      player.x, player.y = home.x, home.y
     end
+
+    if home.pic and not player.pic then
+      player.pic = home.pic
+    end
+
   end
 end
