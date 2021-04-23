@@ -7,9 +7,13 @@ client.start('127.0.0.1:22122')
 
 local share = client.share
 local home = client.home
+local PLAYER_SPEED = 200
 
 function client.connect()
   print('client: connected to server')
+
+  local location = share.players[client.id]
+  home.x, home.y = location.x, location.y
 end
 
 function client.disconnect()
@@ -36,5 +40,22 @@ function client.draw()
     end
   else
     love.graphics.print('connecting...', 20, 20)
+  end
+end
+
+function client.update(dt)
+  if client.connected then
+    if love.keyboard.isDown('left') then
+      home.x = home.x - PLAYER_SPEED * dt
+    end
+    if love.keyboard.isDown('right') then
+      home.x = home.x + PLAYER_SPEED * dt
+    end
+    if love.keyboard.isDown('up') then
+      home.y = home.y - PLAYER_SPEED * dt
+    end
+    if love.keyboard.isDown('down') then
+      home.y = home.y + PLAYER_SPEED * dt
+    end
   end
 end
