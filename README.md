@@ -1,2 +1,2 @@
-# just a castle tutorial game
-getting my feet wet
+# turns out castle is dead so this code is no longer relevant lol
+still keeping it around though in case that changes.
